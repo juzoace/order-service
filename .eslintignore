@@ -1,0 +1,45 @@
+
+/node_modules
+node_modules
+dist
+commitlint.config.js
+/commitlint.config.js
+./commitlint.config.ts
+/commitlint.config.ts
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+/.env
+.yarn
+/.yarn
+.pnp.cjs
+.pnp.loader.mjs
+/.pnp.cjs
+/.pnp.loader.mjs
+/.idea
+.idea
+/erprfp
+.yarn
+/.yarn
+/**/stories/
