@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Item {
+  id          String      @id @default(cuid())
+  title       String      @unique
+  description String
+  imageUrl    String
+  price       Float
+  discount    Float?
+  order_id    String      @db.VarChar(36)
+  order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+
+  @@map("item")
+}
+
+enum OrderStatus {
+  PENDING
+  FAILED
+  COMPLETE
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  user_id       String      @db.VarChar(36)
+  status        OrderStatus
+  // payment_Id    String      @db.VarChar(36)
+  item          Item[]
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt()
+
+  @@index([created_at])
+  @@map("order")
+}
+
+
+
+
