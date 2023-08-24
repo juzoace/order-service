@@ -7,7 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Item {
+enum Currency {
+  NGN
+  USD
+}
+
+enum OrderStatus {
+  PENDING
+  FAILED
+  COMPLETE
+}
+
+model Book {
   id          String      @id @default(cuid())
   title       String      @unique
   description String
@@ -20,25 +31,17 @@ model Item {
   @@map("item")
 }
 
-enum OrderStatus {
-  PENDING
-  FAILED
-  COMPLETE
-}
-
 model Order {
   id            String      @id @default(cuid())
   user_id       String      @db.VarChar(36)
-  status        OrderStatus
-  // payment_Id    String      @db.VarChar(36)
-  item          Item[]
+  status        String
+  payment_Id    String      @db.VarChar(36)
+  books         Book[]
   created_at    DateTime    @default(now())
   updated_at    DateTime    @updatedAt()
-
+  amount        Decimal     @db.Decimal(32, 2)
+  currency      String
   @@index([created_at])
+
   @@map("order")
 }
-
-
-
-
